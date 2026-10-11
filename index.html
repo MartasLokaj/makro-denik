@@ -3561,6 +3561,7 @@ function makeSample(app, appCheckReady) {
         ? "Nepodařilo se načíst ověření reCAPTCHA (" + window.__appCheckErr + "). Vypni pro tuhle stránku blokátor obsahu a načti ji znovu."
         : "Ověření App Check neprošlo. Zkontroluj, že je ve Firebase (App Check → Apps) u webové appky uložený reCAPTCHA klíč a že je v něm doména martaslokaj.github.io. Pak načti stránku znovu.")
       : "Firebase vyžaduje App Check, který ještě není nastavený. V AI Logic dočasně vypni vynucování App Check.";
+    if (!hint && isBusy(e)) hint = "Gemini je teď přetížený – na straně Googlu je velký nával. Zkusil jsem to znovu i s jiným modelem. Počkej chvilku a dej Zkusit znovu.";
     if (/429|quota|exhaust|rate limit/.test(m)) return { code: "rate_limited", message: raw, detail: raw, hint };
     if (/safety|blocked due to|prohibited/.test(m) && !hint) return { code: "refused", message: raw, detail: raw };
     return { code: "upstream_error", message: raw, detail: raw, hint };
@@ -3573,29 +3574,43 @@ function makeSample(app, appCheckReady) {
     if (a >= 0 && b > a) { try { return JSON.parse(text.slice(a, b + 1)); } catch {} }
     throw { code: "invalid_json", message: "no JSON", text };
   };
+  /* Google sometimes answers "model is experiencing high demand" (500/503). That is temporary:
+     wait a moment and retry, then fall back to a lighter model for this one question. */
+  const isBusy = e => /high demand|overloaded|try again later|\[50[0-4]|\b50[0-4]\b|unavailable|internal error|deadline/i.test(String(e && (e.message || e)));
+  const dead = new Set();
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
   async function run(input, opts = {}) {
     const signal = opts && opts.signal;
     if (signal && signal.aborted) throw { code: "cancelled" };
     let onAbort;
     const aborted = new Promise((_, rej) => { onAbort = () => rej({ code: "cancelled" }); if (signal) signal.addEventListener("abort", onAbort, { once: true }); });
     aborted.catch(() => {});
+    let busyFallback = false, lastErr = null;
     try {
       for (let i = working; i < chain.length; i++) {
-        try {
-          const model = await Promise.race([modelFor(chain[i]), aborted]);
-          const res = await Promise.race([model.generateContent({ contents: toContents(input) }), aborted]);
-          let text = "";
-          try { text = res.response.text(); } catch (e) { throw mapErr(e); }
-          if (!text || !text.trim()) throw { code: "empty_completion" };
-          working = i;
-          return text;
-        } catch (e) {
-          if (e && e.code === "cancelled") throw e;
-          if (isNotFound(e) && i < chain.length - 1) { console.warn(`Gemini: model ${chain[i]} není dostupný, zkouším ${chain[i + 1]}`); continue; }
-          throw e;
+        if (dead.has(chain[i])) continue;
+        for (let attempt = 0; attempt < 2; attempt++) {
+          try {
+            const model = await Promise.race([modelFor(chain[i]), aborted]);
+            const res = await Promise.race([model.generateContent({ contents: toContents(input) }), aborted]);
+            let text = "";
+            try { text = res.response.text(); } catch (e) { throw mapErr(e); }
+            if (!text || !text.trim()) throw { code: "empty_completion" };
+            if (!busyFallback) working = i; /* remember only a model that replaced a missing one, not a busy one */
+            return text;
+          } catch (e) {
+            if (e && e.code === "cancelled") throw e;
+            lastErr = e;
+            if (isNotFound(e)) { dead.add(chain[i]); console.warn(`Gemini: model ${chain[i]} není dostupný`); break; }
+            if (isBusy(e)) {
+              if (attempt === 0) { console.warn(`Gemini: ${chain[i]} je přetížený, zkouším znovu`); await Promise.race([sleep(1500), aborted]); continue; }
+              busyFallback = true; console.warn(`Gemini: ${chain[i]} je pořád přetížený, zkouším jiný model`); break;
+            }
+            throw e;
+          }
         }
       }
-      throw { code: "upstream_error", message: "no model" };
+      throw lastErr || { code: "upstream_error", message: "no model" };
     } catch (e) {
       if (e && e.code && !(e instanceof Error)) throw e;
       console.warn("Gemini:", e);
