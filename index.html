@@ -292,6 +292,13 @@ body{padding-top:var(--tbh)}
 .ing.on .txt{text-decoration:line-through;color:var(--muted)}
 .ing.on .txt b{color:var(--muted)}
 .ing .emo{width:36px;height:36px;font-size:20px;border-radius:11px}
+.ingrow{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line)}
+.ingrow:first-child{border-top:0}
+.ingrow .ing{flex:1;min-width:0;border-top:0}
+.ingadj{flex:none;font-size:18px;font-weight:800}
+.dtag{display:inline-block;font-size:12px;font-weight:800;color:var(--good);background:var(--good-bg);border-radius:999px;padding:1px 8px;vertical-align:1px;text-decoration:none}
+.tweaks{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--ink-2);background:var(--good-bg);border-radius:14px;padding:10px 12px;margin-top:6px}
+.tweaks span{flex:1;min-width:200px}
 .stepc{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-lg);padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px}
 .stepc .sh{display:flex;align-items:center;gap:10px}
 .stepc .no{width:32px;height:32px;border-radius:50%;background:var(--card-2);color:var(--primary-deep);display:grid;place-items:center;font-weight:900;flex:none}
@@ -434,6 +441,7 @@ html.has-timers .ag-head{padding-top:10px}
 .msg.me{align-self:flex-end;background:var(--primary);color:var(--on-primary);border-bottom-right-radius:6px}
 .msg.bot{align-self:flex-start;background:var(--soft);border:1.5px solid var(--line);border-bottom-left-radius:6px}
 .msg.err{background:var(--danger-bg);color:var(--danger-fg);border-color:transparent;display:flex;flex-direction:column;align-items:flex-start}
+.errd{display:block;margin-top:6px;font-size:12px;font-weight:600;opacity:.8;font-family:ui-monospace,Menlo,monospace;overflow-wrap:anywhere;white-space:normal}
 .msg.typing{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-weight:700}
 .dots{display:inline-flex;gap:4px}
 .dots i{width:7px;height:7px;border-radius:50%;background:var(--primary);animation:dot 1s infinite ease-in-out}
@@ -533,6 +541,101 @@ html.has-timers .ag-head{padding-top:10px}
 .frrow{display:flex;gap:10px}
 .frrow .inp{flex:1}
 .frrow .btn{width:auto;flex:none;min-height:56px;padding-inline:20px}
+/* Page groups: on phones they are plain stacks (same spacing as before); wide screens turn them into columns */
+.tgrid,.t-ring,.t-macros,.t-list,.t-actions,.libgrid,.lib-side,.lib-main,.frgrid,.fr-left,.fr-right,.wgrid,.ggrid,.g-main,.g-side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.brand{display:none}
+.ringstats{flex:none}
+/* Tablet and up: use the space */
+@media (min-width:760px){
+  .app{max-width:1180px;padding-inline:28px}
+  .stack{gap:20px}
+  .topbar{padding-block:20px 14px}
+  .topbar h1{font-size:42px}
+  .daysw{max-width:620px;margin:0 auto}
+  .daysw .lbl b{font-size:38px}
+  .daysw .lbl span{font-size:15px}
+  .tgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:stretch}
+  .t-ring .ringcard{height:100%;justify-content:center;padding:56px 28px 28px;gap:22px}
+  .ringrow{justify-content:center;gap:18px}
+  .ring{width:min(28vw,300px)}
+  .ring .center b{font-size:clamp(44px,5.4vw,66px)}
+  .ring .center span{font-size:14px}
+  .coach{flex:0 1 230px}
+  .arny{max-width:230px}
+  .coach .bubble{font-size:15px;padding:7px 12px}
+  .ringstats{padding:16px 20px}
+  .stat small{font-size:13px}
+  .stat b{font-size:34px}
+  .stat b i{font-size:16px}
+  .t-macros{gap:16px}
+  .t-macros .protein{padding:22px 24px}
+  .protein .head h3{font-size:30px}
+  .protein .val{font-size:36px}
+  .protein .val i{font-size:17px}
+  .protein .bar{height:22px}
+  .protein .sub{font-size:15px}
+  .t-macros .macros2{grid-template-columns:1fr;gap:16px}
+  .macros2 .mrow{padding:18px 24px}
+  .macros2 .mrow h3{font-size:24px}
+  .macros2 .mrow .val{font-size:30px}
+  .mrow .val i{font-size:16px}
+  .mrow .bar{height:16px}
+  .mrow .sub{font-size:14px}
+  .t-actions{align-self:start}
+  .row .name{font-size:17px}
+  .wgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);grid-template-areas:"form chart" "stats chart" "recent chart";gap:20px;align-items:start}
+  .w-form{grid-area:form}.w-stats{grid-area:stats}.w-chart{grid-area:chart}.w-recent{grid-area:recent}
+  .ggrid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:start}
+  #foodList{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}
+  #frResults{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}
+  #frResults>.card-title,#frResults>.note,#frResults>.btn,#frResults>.msg,#frResults>.aiwait,#frResults>.card.empty{grid-column:1/-1}
+  .fridge{width:300px;height:540px}
+  .fridge::after{box-shadow:242px 0 0 #5C1520}
+  .fr-door{width:84px;height:540px}
+  .fi{width:58px}
+  .fi .fe{font-size:33px}
+  .fi .fl{max-width:58px;font-size:11px}
+  .fi.sm{width:30px}
+  .fi.sm .fe{font-size:23px}
+  .sheet-head,.sheet-inner{max-width:760px}
+  .tabbar .in{max-width:680px}
+  .tab{font-size:13px}
+  .tab svg{width:27px;height:27px}
+}
+/* iPad upright: the calorie card spans the width (ring, coach, totals in one row), macros below it */
+@media (min-width:760px) and (max-width:1099px){
+  .t-ring,.t-macros{grid-column:1/-1}
+  .t-ring .ringcard{flex-direction:row;align-items:center;justify-content:space-between;gap:20px}
+  .t-ring .ringrow{flex:1;justify-content:flex-start}
+  .t-ring .ringstats{width:220px;grid-template-columns:1fr;row-gap:14px}
+  .t-ring .ringstats .stat+.stat{border-left:0;padding-left:0;border-top:2px dashed var(--line-2);padding-top:14px}
+  .t-macros .macros2{grid-template-columns:1fr 1fr}
+}
+@media (min-width:900px){
+  .libgrid{display:grid;grid-template-columns:minmax(320px,380px) minmax(0,1fr);gap:24px;align-items:start}
+  .lib-side{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--tbh) + 92px)}
+}
+@media (min-width:1000px){
+  .frgrid{display:grid;grid-template-columns:minmax(420px,460px) minmax(0,1fr);gap:28px;align-items:start}
+  .fr-left{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--tbh) + 92px)}
+  #frResults{grid-template-columns:1fr}
+}
+/* Computer: navigation moves to a rail on the left */
+@media (min-width:1100px){
+  body{padding-left:236px}
+  .tabbar{top:0;bottom:0;right:auto;width:236px;border-top:0;border-right:1px solid var(--line);padding:calc(28px + env(safe-area-inset-top,0px)) 16px 24px;background:var(--bg);backdrop-filter:none}
+  .tabbar .in{display:flex;flex-direction:column;gap:6px;max-width:none}
+  .brand{display:block;font-family:var(--display);font-size:25px;font-weight:800;letter-spacing:-.03em;padding:0 10px 22px}
+  .tab{flex-direction:row;justify-content:flex-start;gap:12px;padding:8px 10px;font-size:17px;border-radius:16px}
+  .tab .ic{width:44px;height:40px}
+  .tab[aria-current="page"]{background:var(--card-2)}
+  .tab[aria-current="page"] .ic{background:transparent}
+  .tab:hover{background:var(--soft)}
+  .app{padding-block:0 48px}
+  .toast{bottom:28px;left:calc(50% + 118px)}
+  #timerbar{left:236px}
+  #frResults{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+}
 @media (max-width:360px){.ringcard{gap:10px;padding-inline:14px}.stat b{font-size:20px}.result b{font-size:17px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -587,6 +690,7 @@ img{max-width:100%}
 
 <nav class="tabbar" aria-label="Hlavní navigace">
   <div class="in">
+    <div class="brand" aria-hidden="true"><span class="hl">Makro deník</span></div>
     <button class="tab" data-tab="today" aria-current="page"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 12V7.5M12 12l3.2 2"/></svg></span>Dnes</button>
     <button class="tab" data-tab="foods"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5c2.5-1.3 5.3-1.3 8 .5v13.5c-2.7-1.8-5.5-1.8-8-.5z"/><path d="M20 5.5c-2.5-1.3-5.3-1.3-8 .5v13.5c2.7-1.8 5.5-1.8 8-.5z"/></svg></span>Recepty</button>
     <button class="tab" data-tab="recipes"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="2.5" width="13" height="19" rx="3"/><path d="M5.5 10h13M9 5.8v1.6M9 12.8v3"/></svg></span>Lednice</button>
@@ -1078,6 +1182,8 @@ function renderToday() {
   const copyLbl = k === tk ? "Zkopírovat včerejšek" : "Zkopírovat předchozí den";
   body.innerHTML = `
     ${storageBanner()}
+    <div class="tgrid">
+    <div class="t-ring">
     <div class="card ringcard blanket">
       <div class="ringrow">
         <div class="ring mtap${over ? " over" : ""}" role="button" tabindex="0" data-act="macro" data-m="k" aria-label="Kalorie: snězeno ${fmt(t.kcal)} z ${fmt(g.kcal)} kcal, upravit">${ringSVG(g.kcal ? t.kcal / g.kcal : 0, g.kcal && over ? t.kcal / g.kcal - 1 : 0)}
@@ -1093,6 +1199,8 @@ function renderToday() {
         <div class="stat"><small>Snězeno</small><b class="num">${fmt(t.kcal)}<i>kcal</i></b></div>
       </div>
     </div>
+    </div>
+    <div class="t-macros">
     <div class="card protein mtap" role="button" tabindex="0" data-act="macro" data-m="p" aria-label="Bílkoviny: ${fmt(t.p)} z ${fmt(g.p)} g, upravit">
       <div class="head"><h3>Bílkoviny <span class="pill">Hlavní cíl</span></h3>
         <div class="val num">${fmt(t.p)} <i>/ ${fmt(g.p)} g</i></div></div>
@@ -1100,12 +1208,18 @@ function renderToday() {
       <div class="sub num">${pLeft > 0 ? `Zbývá ${fmt(pLeft)} g · ${fmt(pFrac * 100)} % splněno` : `Cíl splněn${pLeft < 0 ? ` (+${fmt(-pLeft)} g navíc)` : ""}. Výborně!`}<span class="edit-hint">Klepnutím upravíš</span></div>
     </div>
     <div class="macros2">${tile("carb", "c", "Sacharidy", t.c, g.c)}${tile("fat", "f", "Tuky", t.f, g.f)}</div>
+    </div>
+    <div class="t-list">
     <div class="card">
       <div class="card-title"><span>Snězeno${entries && entries.length ? ` · ${entries.length}` : ""}</span><span class="num">B ${fmt(t.p)} g</span></div>
       ${list}
     </div>
+    </div>
+    <div class="t-actions">
     <button class="btn btn-primary btn-big" data-act="openAdd">${IC.plus.replace("<svg", '<svg width="24" height="24"')} PŘIDAT JÍDLO</button>
     <button class="btn btn-soft" data-act="copyPrev">${IC.copy.replace("<svg", '<svg width="22" height="22"')} ${copyLbl}</button>
+    </div>
+    </div>
   `;
 }
 function addEntriesToDay(k, newEntries, msg) {
@@ -1206,7 +1320,7 @@ function renderSheet() {
   if (fr.type === "amount") updateAmount();
   hydratePhotos();
 }
-const pickAct = fr => fr.type === "add" ? "pickFood" : fr.for === "ing" ? "pickForIng" : "pickForMeal";
+const pickAct = fr => fr.type === "add" ? "pickFood" : fr.for === "ing" ? "pickForIng" : fr.for === "extra" ? "pickForExtra" : "pickForMeal";
 
 /* --- amount --- */
 function startAmount(food, opts = {}) {
@@ -1227,7 +1341,7 @@ function amountHTML(fr) {
       <button data-act="amtMode" data-v="ks" aria-pressed="${fr.mode === "ks"}">${esc(pieceLabel(f))}${f.pieceG ? ` (${fmt1(f.pieceG)} g)` : ""}</button></div>` : "";
   const editing = fr.target === "day" && fr.entryId;
   const ed = editorFrame();
-  const label = fr.target === "meal" ? (fr.itemIndex != null ? "Uložit" : ed && ed.type === "recipeEdit" ? "Přidat do receptu" : "Přidat do jídla") : (editing ? "Uložit změny" : `Přidat · ${dayTitle(state.day)}`);
+  const label = fr.target === "extra" ? "Přidat do receptu (jen teď)" : fr.target === "meal" ? (fr.itemIndex != null ? "Uložit" : ed && ed.type === "recipeEdit" ? "Přidat do receptu" : "Přidat do jídla") : (editing ? "Uložit změny" : `Přidat · ${dayTitle(state.day)}`);
   return `<div class="amthead">${f.id ? emo(foodEmoji(f), "xl") : emo(guessEmoji(f.name), "xl")}<div class="note num">${esc(foodMeta(f))}</div></div>
     ${segHTML}
     <div class="field"><label for="amtQty">Množství (${fr.mode === "g" ? "g" : esc(pieceLabel(f))})</label>
@@ -1256,6 +1370,14 @@ function makeEntry(f, qty, mode, id, meal) {
 }
 function amountConfirm() {
   const fr = topSheet(); updateAmount(); if (!(fr.qty > 0)) return;
+  if (fr.target === "extra") {
+    const r = curRecipe(fr.rid); if (!r) { closeSheet(); return; }
+    const f = fr.food, unit = fr.mode === "g" ? "g" : (f.piece && f.piece !== "ks" ? f.piece : null);
+    rv(r).extra.push({ id: uid6(), foodId: f.id, name: lcFirst(f.name), amount: r1(fr.qty), unit });
+    while (topSheet() && !(topSheet().type === "recipe" && topSheet().id === fr.rid)) sheetStack.pop();
+    if (sheetStack.length) renderSheet(); else closeSheet();
+    toast(`Přidáno navíc: ${f.name}`); return;
+  }
   if (fr.target === "meal") {
     const mf = editorFrame();
     const item = { foodId: fr.food.id, qty: r1(fr.qty), mode: fr.mode };
@@ -1359,6 +1481,7 @@ function renderFoods() {
   const keepFocus = document.activeElement && document.activeElement.id === "foodQ";
   if (keepFocus && $("#foodList")) { $("#foodList").innerHTML = libListHTML(); hydratePhotos(); return; }
   body.innerHTML = `${storageBanner()}
+    <div class="libgrid"><div class="lib-side">
     <div class="card blanket addchoice">
       <div class="ac-row">
         <div class="ac-head"><div class="flabel">Co chceš přidat?</div><span class="bubble" data-act="openChef" aria-hidden="true">Popiš mi recept!</span></div>
@@ -1370,11 +1493,13 @@ function renderFoods() {
       </div>
       <button class="btn btn-ghost" data-act="importRecipe" style="min-height:44px">Vložit recept z JSON</button>
     </div>
+    </div><div class="lib-main">
     <div class="seg" role="group" aria-label="Zobrazit">
       <button data-act="libView" data-v="recipes" aria-pressed="${view === "recipes"}">Recepty <span class="num">${nR}</span></button>
       <button data-act="libView" data-v="foods" aria-pressed="${view === "foods"}">Potraviny <span class="num">${nF}</span></button></div>
     <div class="search">${IC.search}<input class="inp" id="foodQ" type="search" placeholder="${view === "recipes" ? "Hledat recept nebo surovinu…" : "Hledat potravinu…"}" autocomplete="off" value="${esc(state.foodQuery)}"></div>
-    <div class="flist" id="foodList">${libListHTML()}</div>`;
+    <div class="flist" id="foodList">${libListHTML()}</div>
+    </div></div>`;
   hydratePhotos();
 }
 document.getElementById("app").addEventListener("click", e => {
@@ -1445,8 +1570,8 @@ function wStat(label, ch) {
   return `<div class="wstat"><small>${label}</small><b class="num ${cls}">${ch.d > 0 ? "+" : ch.d < 0 ? "−" : ""}${fmt(Math.abs(ch.d), 1)} kg</b><span class="num">od ${shortDate(ch.from)}</span></div>`;
 }
 function niceStep(range) { const raw = range / 4; const p = Math.pow(10, Math.floor(Math.log10(raw))); const m = raw / p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p; }
-function chartSVG(ws, W) {
-  const H = 210, L = 40, R = 14, T = 14, B = 26;
+function chartSVG(ws, W, H = 210) {
+  const L = 40, R = 14, T = 14, B = 26;
   if (!ws.length) return `<div class="empty"><b>Zatím žádná data</b>Zapište svou první váhu výše.</div>`;
   const t0 = dateOf(ws[0].date).getTime(), t1 = dateOf(ws[ws.length - 1].date).getTime();
   let lo = Math.min(...ws.map(w => w.kg)), hi = Math.max(...ws.map(w => w.kg));
@@ -1462,7 +1587,7 @@ function chartSVG(ws, W) {
   const lp = pts[pts.length - 1];
   const xl = [`<text x="${L}" y="${H - 6}" text-anchor="start">${shortDate(ws[0].date)}</text>`];
   if (ws.length > 1) xl.push(`<text x="${W - R}" y="${H - 6}" text-anchor="end">${shortDate(ws[ws.length - 1].date)}</text>`);
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Graf vývoje váhy">
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" style="height:${H}px" role="img" aria-label="Graf vývoje váhy">
     <defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--primary);stop-opacity:.28"/><stop offset="1" style="stop-color:var(--primary);stop-opacity:0"/></linearGradient></defs>
     ${grid}${area ? `<path d="${area}" fill="url(#wg)"/>` : ""}
     <path d="${line}" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
@@ -1479,10 +1604,12 @@ function renderWeight() {
   const kgVal = $("#wKg") ? $("#wKg").value : "";
   const from = state.wRange ? addDays(todayKey(), -state.wRange) : "0000";
   const inRange = ws.filter(w => w.date >= from);
-  const W = Math.max(280, Math.min(488, (document.querySelector(".app").clientWidth || 360) - 32 - 36));
+  const box0 = $("#wChartBox"), W = Math.max(280, Math.min(1000, box0 && box0.clientWidth ? box0.clientWidth : (document.querySelector(".app").clientWidth || 360) - 32 - 36));
+  const H = W > 560 ? 320 : 210;
   const recent = ws.slice(-8).reverse();
   body.innerHTML = `${storageBanner()}
-    <div class="card stack blanket">
+    <div class="wgrid">
+    <div class="card stack blanket w-form">
       <div class="grid2">
         <div class="field"><label for="wDate">Datum</label><input class="inp" id="wDate" type="date" max="${todayKey()}" value="${esc(dateVal)}"></div>
         <div class="field"><label for="wKg">Váha (kg)</label><input class="inp num" id="wKg" inputmode="decimal" placeholder="${last ? esc(fmt1(last.kg)) : "např. 82,5"}" autocomplete="off" value="${esc(kgVal)}"></div>
@@ -1490,19 +1617,25 @@ function renderWeight() {
       <div class="errmsg" id="wErr"></div>
       <button class="btn btn-primary" data-act="wSave">Zapsat váhu</button>
     </div>
-    <div class="wstats">
+    <div class="wstats w-stats">
       <div class="wstat"><small>Aktuálně</small><b class="num">${last ? fmt(last.kg, 1) + " kg" : "—"}</b><span class="num">${last ? shortDate(last.date) : "zatím nic"}</span></div>
       ${wStat("Za týden", changeOver(ws, 7))}${wStat("Za měsíc", changeOver(ws, 30))}
     </div>
-    <div class="card">
+    <div class="card w-chart">
       <div class="seg" role="group" aria-label="Období" style="margin-bottom:10px">
         ${[[30, "30 dní"], [90, "90 dní"], [0, "Vše"]].map(([v, l]) => `<button data-act="wRange" data-v="${v}" aria-pressed="${state.wRange === v}">${l}</button>`).join("")}
       </div>
-      ${inRange.length ? chartSVG(inRange, W) : ws.length ? `<div class="empty">V tomto období nejsou žádné záznamy.</div>` : chartSVG([], W)}
+      <div id="wChartBox">${inRange.length ? chartSVG(inRange, W, H) : ws.length ? `<div class="empty">V tomto období nejsou žádné záznamy.</div>` : chartSVG([], W, H)}</div>
     </div>
-    ${recent.length ? `<div class="card"><div class="card-title"><span>Poslední záznamy</span></div><div class="list">${recent.map(w => `
+    ${recent.length ? `<div class="card w-recent"><div class="card-title"><span>Poslední záznamy</span></div><div class="list">${recent.map(w => `
       <div class="row"><div class="main"><div class="name num">${fmt(w.kg, 1)} kg</div><div class="meta">${esc(longDate(w.date))}</div></div>
-      <div class="acts"><button class="sq danger" data-act="wDel" data-d="${w.date}" aria-label="Smazat záznam">${IC.trash}</button></div></div>`).join("")}</div></div>` : ""}`;
+      <div class="acts"><button class="sq danger" data-act="wDel" data-d="${w.date}" aria-label="Smazat záznam">${IC.trash}</button></div></div>`).join("")}</div></div>` : ""}
+    </div>`;
+  /* Draw the chart at the width its column really has (wide screens put it beside the form). */
+  const box = $("#wChartBox");
+  if (box && inRange.length && Math.abs(box.clientWidth - W) > 8 && box.clientWidth > 200) {
+    const w2 = Math.min(1000, box.clientWidth); box.innerHTML = chartSVG(inRange, w2, w2 > 560 ? 320 : 210);
+  }
 }
 function weightSave() {
   const d = $("#wDate").value, kg = num($("#wKg").value), err = $("#wErr");
@@ -1527,6 +1660,7 @@ function renderGoals() {
   const g = S.lib.goals;
   const fld = (id, label, val, unit) => `<div class="field"><label for="${id}">${label} <span class="hint">${unit}</span></label><input class="inp num" id="${id}" inputmode="decimal" autocomplete="off" value="${esc(fmt1(val))}"></div>`;
   body.innerHTML = `${storageBanner()}
+    <div class="ggrid"><div class="g-main">
     <div class="card stack blanket">
       ${fld("gK", "Energie", g.kcal, "kcal / den")}
       <div class="protein card" style="padding:14px">${fld("gP", "Bílkoviny · hlavní cíl", g.p, "g / den")}</div>
@@ -1536,7 +1670,9 @@ function renderGoals() {
       <button class="btn btn-primary btn-big" data-act="gSave">Uložit cíle</button>
     </div>
     <p class="note">${S.mode === "cloud" ? "Data se ukládají do vašeho účtu, takže je uvidíte i na jiném zařízení." : "Data se ukládají jen v tomto prohlížeči."}</p>
-    ${backupCardHTML()}`;
+    </div><div class="g-side">
+    ${backupCardHTML()}
+    </div></div>`;
   goalsHint();
 }
 function goalsHint() {
@@ -1837,7 +1973,7 @@ Pravidla: unit je "g", "ml", "lžíce", "lžička", nebo null u kusů (počítan
     for (let i = AIR.length - 1; i >= 0; i--) if (!isSaved(AIR[i])) AIR.splice(i, 1);
     AIR.unshift(...list);
   } catch (e) {
-    if (e && e.code !== "cancelled") FRAI.err = (AG_ERR[e.code] || "Recepty se nepodařilo vymyslet. Zkus to znovu.");
+    if (e && e.code !== "cancelled") FRAI.err = ((e.hint || AG_ERR[e.code] || "Recepty se nepodařilo vymyslet. Zkus to znovu.") + (e.detail ? ` (${String(e.detail).slice(0, 300)})` : ""));
   } finally { FRAI.busy = false; FRAI.ctl = null; updateFridge(); }
 }
 
@@ -1849,6 +1985,7 @@ function renderRecipes() {
   $("#recipeCount").textContent = n ? `${n} ${n === 1 ? "věc" : n < 5 ? "věci" : "věcí"}` : "prázdná";
   if ($("#frIn") && body.contains($("#frIn"))) { updateFridge(); return; }
   body.innerHTML = `${storageBanner()}
+    <div class="frgrid"><div class="fr-left">
     <div class="fridge-wrap">
       <div class="fridge"><div class="fr-in"><span class="fr-lamp" aria-hidden="true"></span>
         <form class="fr-write" id="frForm" autocomplete="off">
@@ -1858,8 +1995,10 @@ function renderRecipes() {
       <div class="fr-door" id="frDoor">${fridgeDoorHTML()}</div>
     </div>
     <button class="btn btn-ghost" data-act="frClear" id="frClear" style="min-height:44px;margin-top:-12px" ${n ? "" : "hidden"}>Vyprázdnit lednici</button>
+    </div><div class="fr-right">
     <h2 class="sech">Co z toho <span class="hl">uvaříš</span></h2>
-    <div class="stack" id="frResults">${fridgeResultsHTML()}</div>`;
+    <div class="stack" id="frResults">${fridgeResultsHTML()}</div>
+    </div></div>`;
   hydratePhotos();
 }
 /* Re-draw the fridge contents without touching the text field, so typing is never interrupted. */
@@ -1905,8 +2044,21 @@ function commitInput() {
 })();
 
 /* ---------- interactive recipe view ---------- */
-const RV = {};                                   // recipeId -> { m: multiplier, checked: {ingId: true} }
-const rv = r => RV[r.id] || (RV[r.id] = { m: 1, checked: {} });
+/* recipeId -> { m: multiplier, checked: {ingId: true}, delta: {ingId: extra amount}, extra: [one-off ingredients] }
+   delta and extra are tweaks for this cooking only; the saved recipe never changes. */
+const RV = {};
+const rv = r => { const v = RV[r.id] || (RV[r.id] = { m: 1, checked: {} }); v.delta = v.delta || {}; v.extra = v.extra || []; return v; };
+const ingAmt = (r, ing) => Math.max(0, (+ing.amount || 0) * rv(r).m + (rv(r).delta[ing.id] || 0));
+/* What the tweaks add: their macros, a short description, and the adjusted per-portion values. */
+function tweakInfo(r) {
+  const v = rv(r), add = { kcal: 0, p: 0, c: 0, f: 0 }, parts = []; let unknown = false;
+  const plus = (ing, amt) => { const mm = ingMacros({ ...ing, amount: amt }); if (mm) { add.kcal += mm.kcal; add.p += mm.p; add.c += mm.c; add.f += mm.f; } else unknown = true; };
+  r.ingredients.forEach(ing => { const d = v.delta[ing.id]; if (!d) return; plus(ing, d); const q = fmtQty(Math.abs(d), ing.unit); parts.push(`${d > 0 ? "+" : "−"}${q.q}${q.u ? " " + q.u : ""} ${ing.name}`); });
+  v.extra.forEach(x => { plus(x, x.amount); parts.push("+" + ingText(x)); });
+  const any = parts.length > 0, serv = servCount(r) * v.m, t = recipeTotals(r);
+  const per = { kcal: (t.kcal * v.m + add.kcal) / serv, p: (t.p * v.m + add.p) / serv, c: (t.c * v.m + add.c) / serv, f: (t.f * v.m + add.f) / serv };
+  return { any, add, parts, unknown, per };
+}
 const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 /* AI ideas from the fridge live here until saved. */
 const AIR = [];
@@ -1921,16 +2073,30 @@ function servCtlHTML(r) {
       <b class="num">${fmt1(serv)} ${porceWord(serv)}</b><span>${v.m === 1 ? "podle receptu" : `recept je na ${fmt1(servCount(r))} · klepnutím vrátit`}</span></button>
     <button class="step" data-act="servInc" data-rid="${r.id}" aria-label="Více porcí">+</button></div>`;
 }
-function ingRowHTML(r, ing) {
-  const v = rv(r), on = !!v.checked[ing.id];
-  const has = +ing.amount > 0, p = ingParts(ing, v.m);
-  return `<button class="ing${on ? " on" : ""}" data-act="ingCheck" data-rid="${r.id}" data-ing="${ing.id}" aria-pressed="${on}">
+function ingRowHTML(r, ing, cook) {
+  const v = rv(r), on = !!v.checked[ing.id], d = v.delta[ing.id] || 0;
+  const has = +ing.amount > 0, q = fmtQty(ingAmt(r, ing), ing.unit), dq = d ? fmtQty(Math.abs(d), ing.unit) : null;
+  return `<div class="ingrow"><button class="ing${on ? " on" : ""}" data-act="ingCheck" data-rid="${r.id}" data-ing="${ing.id}" aria-pressed="${on}">
     <span class="chk" aria-hidden="true">${CHECK}</span>${emo(ingEmoji(ing))}
-    <span class="txt">${has ? `<b>${esc(p.qty)}</b> ` : ""}${esc(ing.name)}</span></button>`;
+    <span class="txt">${has ? `<b>${esc(q.q)}${q.u ? " " + esc(q.u) : ""}</b> ` : ""}${esc(ing.name)}${dq ? ` <span class="dtag">${d > 0 ? "+" : "−"}${esc(dq.q)}${dq.u ? " " + esc(dq.u) : ""}</span>` : ""}</span></button>
+    ${has && !cook ? `<button class="sq ingadj" data-act="ingAdj" data-rid="${r.id}" data-ing="${ing.id}" aria-label="Upravit ${esc(ing.name)} jen pro tentokrát">±</button>` : ""}</div>`;
 }
-function ingListHTML(r) {
-  if (!r.ingredients.length) return `<div class="empty">Recept nemá žádné suroviny.</div>`;
-  return `<div class="list">${r.ingredients.map(i => ingRowHTML(r, i)).join("")}</div>`;
+function extraRowHTML(r, x, cook) {
+  const v = rv(r), key = "x:" + x.id, on = !!v.checked[key];
+  return `<div class="ingrow"><button class="ing${on ? " on" : ""}" data-act="ingCheck" data-rid="${r.id}" data-ing="${key}" aria-pressed="${on}">
+    <span class="chk" aria-hidden="true">${CHECK}</span>${emo(ingEmoji(x))}
+    <span class="txt"><b>${esc(ingParts(x).qty)}</b> ${esc(x.name)} <span class="dtag">navíc</span></span></button>
+    ${cook ? "" : `<button class="sq danger" data-act="extraDel" data-rid="${r.id}" data-x="${x.id}" aria-label="Odebrat ${esc(x.name)}">${IC.close}</button>`}</div>`;
+}
+function ingListHTML(r, opts = {}) {
+  const v = rv(r), cook = !!opts.cook;
+  const rows = r.ingredients.map(i => ingRowHTML(r, i, cook)).join("") + v.extra.map(x => extraRowHTML(r, x, cook)).join("");
+  if (!rows && cook) return `<div class="empty">Recept nemá žádné suroviny.</div>`;
+  const tw = cook ? null : tweakInfo(r);
+  return `${rows ? `<div class="list">${rows}</div>` : `<div class="empty">Recept nemá žádné suroviny.</div>`}
+    ${cook ? "" : `<button class="btn btn-ghost" data-act="extraAdd" data-rid="${r.id}" style="min-height:44px">${IC.plus.replace("<svg", '<svg width="18" height="18"')} Přidat surovinu navíc</button>`}
+    ${tw && tw.any ? `<div class="tweaks"><span><b>Jen pro tentokrát:</b> ${esc(tw.parts.join(", "))}${tw.add.kcal ? ` · <b class="num">${tw.add.kcal > 0 ? "+" : "−"}${fmt(Math.abs(tw.add.kcal))} kcal</b>` : ""}${tw.unknown ? " · některé suroviny nejsou propojené s potravinou, do maker se nepočítají" : ""}</span>
+      <button class="chip" data-act="tweakReset" data-rid="${r.id}">Zrušit úpravy</button></div>` : ""}`;
 }
 function checkedCount(r) { const v = rv(r); return r.ingredients.filter(i => v.checked[i.id]).length; }
 /* Step text with every {id} turned into a tappable ingredient chip showing the scaled amount. */
@@ -1939,7 +2105,7 @@ function stepContentHTML(r, content) {
   return esc(content).replace(/\{([^{}]{1,60})\}/g, (all, key) => {
     const ing = r.ingredients.find(i => i.id === key);
     if (!ing) return key;
-    const label = +ing.amount > 0 ? ingText(ing, m) : ing.name;
+    const q = fmtQty(ingAmt(r, ing), ing.unit), label = +ing.amount > 0 ? `${q.q}${q.u ? " " + q.u : ""} ${ing.name}` : ing.name;
     return `<span class="ichip" role="button" tabindex="0" data-act="chip" data-rid="${r.id}" data-ing="${ing.id}" aria-label="${esc(label)}, upravit množství">${esc(label)}</span>`;
   });
 }
@@ -1953,14 +2119,14 @@ function stepsHTML(r) {
 }
 
 function recipeDetailHTML(r) {
-  const v = rv(r), per = recipePer(r), s = servCount(r), w = recipeWeight(r), fd = recipeFood(r);
+  const v = rv(r), tw = tweakInfo(r), per = tw.any ? tw.per : recipePer(r), s = servCount(r), w = recipeWeight(r), fd = recipeFood(r);
   const serv = s * v.m, day = state.day !== todayKey() ? ` · ${dayTitle(state.day)}` : "";
   const noValues = per.kcal === 0 && per.p === 0;
   const cc = checkedCount(r), saved = isSaved(r);
   return `<div class="hero${r.photo ? "" : " small"}" aria-hidden="true">${esc(recipeEmoji(r))}${photoTag(r)}</div>
     ${r.description ? `<p class="rdesc">${esc(r.description)}</p>` : ""}
     <div class="card">
-      <div class="card-title"><span>Na 1 porci</span><span class="num">${w ? `porce ≈ ${fmt(w / s)} g` : ""}</span></div>
+      <div class="card-title"><span>Na 1 porci${tw.any ? " · s úpravami" : ""}</span><span class="num">${w && !tw.any ? `porce ≈ ${fmt(w / s)} g` : ""}</span></div>
       <div class="result">
         <div class="kc"><b class="num">${fmt(per.kcal)}</b><small>kcal</small></div>
         <div class="pr"><b class="num">${fmt1(r1(per.p))}</b><small>bílk. g</small></div>
@@ -2028,6 +2194,22 @@ function openAmountPop(r, ingId) {
   updatePop();
   const inp = $("#popAmt"); inp.focus(); try { inp.select(); } catch {}
 }
+function openIngAdj(r, ingId) {
+  const ing = r.ingredients.find(i => i.id === ingId); if (!ing || !(+ing.amount > 0)) return;
+  popState = { rid: r.id, ingId, kind: "adj" };
+  const pop = $("#pop"); pop.className = "pop"; pop.hidden = false;
+  pop.innerHTML = `<div class="pop-card" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+    <h3 id="popTitle">${esc(ing.name)}</h3>
+    <p class="fhint" style="margin:-6px 0 0">Jen pro tentokrát. Uložený recept zůstane beze změny.</p>
+    <div class="unitrow"><button class="step" data-pop="minus" aria-label="Méně">−</button>
+      <input class="inp num" id="popAmt" inputmode="decimal" autocomplete="off" value="${esc(fmt1(editValue(ingAmt(r, ing), ing.unit)))}" aria-label="Množství">
+      <button class="step" data-pop="plus" aria-label="Více">+</button><span>${esc(unitLabel(ing.unit))}</span></div>
+    <div class="note" id="popInfo" style="text-align:left"></div>
+    <div class="btnrow"><button class="btn btn-soft" data-pop="cancel">Zrušit</button><button class="btn btn-primary" data-pop="ok" id="popOk">Použít</button></div></div>`;
+  updatePop();
+  const inp = $("#popAmt"); inp.focus(); try { inp.select(); } catch {}
+}
+const adjStep = u => u === "g" || u === "ml" ? 10 : u === "lžíce" || u === "lžička" ? 0.5 : 1;
 function popValues() {
   if (!popState) return null;
   const r = curRecipe(popState.rid), ing = r && r.ingredients.find(i => i.id === popState.ingId);
@@ -2036,6 +2218,12 @@ function popValues() {
 }
 function updatePop() {
   const pv = popValues(); if (!pv) return;
+  if (popState.kind === "adj") {
+    const base = pv.ing.amount * rv(pv.r).m, d = (isFinite(pv.val) ? pv.val : base) - base, q = fmtQty(base, pv.ing.unit);
+    $("#popOk").disabled = !(pv.val >= 0);
+    $("#popInfo").textContent = `Podle receptu ${q.q}${q.u ? " " + q.u : ""}` + (Math.abs(d) > 1e-9 ? ` · teď ${d > 0 ? "+" : "−"}${fmt1(r1(Math.abs(d)))} ${unitLabel(pv.ing.unit)}` : "");
+    return;
+  }
   const ok = pv.val > 0, info = $("#popInfo");
   $("#popOk").disabled = !ok;
   if (!ok) { info.textContent = "Zadejte množství větší než 0."; return; }
@@ -2044,7 +2232,14 @@ function updatePop() {
 }
 function closePop() { popState = null; const p = $("#pop"); p.hidden = true; p.innerHTML = ""; }
 function confirmPop() {
-  const pv = popValues(); if (!pv || !(pv.val > 0)) return;
+  const pv = popValues(); if (!pv) return;
+  if (popState.kind === "adj") {
+    if (!(pv.val >= 0)) return;
+    const v = rv(pv.r), d = r1(pv.val - pv.ing.amount * v.m);
+    if (Math.abs(d) < 1e-9) delete v.delta[pv.ing.id]; else v.delta[pv.ing.id] = d;
+    closePop(); refreshRecipeViews(); return;
+  }
+  if (!(pv.val > 0)) return;
   closePop(); setMultiplier(pv.r, pv.val / pv.ing.amount);
 }
 (function () {
@@ -2052,6 +2247,11 @@ function confirmPop() {
   pop.addEventListener("click", e => {
     if (e.target === pop) { closePop(); return; }
     const b = e.target.closest("[data-pop]"); if (!b) return;
+    if (b.dataset.pop === "minus" || b.dataset.pop === "plus") {
+      const pv = popValues(); if (!pv) return;
+      const st = adjStep(pv.ing.unit), cur = isFinite(pv.val) ? pv.val : 0;
+      $("#popAmt").value = fmt1(Math.max(0, r1(cur + (b.dataset.pop === "plus" ? st : -st)))); updatePop(); return;
+    }
     if (b.dataset.pop === "ok") confirmPop(); else closePop();
   });
   pop.addEventListener("input", e => { if (e.target.id === "popAmt") updatePop(); });
@@ -2075,6 +2275,10 @@ function recipeAction(a, b) {
   else if (a === "servReset") setMultiplier(r, 1);
   else if (a === "timer") onTimerBtn(r, b.dataset.sid);
   else if (a === "cookStart") openCook(r);
+  else if (a === "ingAdj") openIngAdj(r, b.dataset.ing);
+  else if (a === "extraDel") { const v = rv(r); v.extra = v.extra.filter(x => x.id !== b.dataset.x); delete v.checked["x:" + b.dataset.x]; refreshRecipeViews(); }
+  else if (a === "tweakReset") { const v = rv(r); v.delta = {}; v.extra = []; refreshRecipeViews(); }
+  else if (a === "extraAdd") openSheet({ type: "pick", for: "extra", rid: r.id, q: "" });
   else return false;
   return true;
 }
@@ -2088,7 +2292,11 @@ document.getElementById("sheet").addEventListener("click", e => {
     renderSheet(); render(); toast(`Recept „${r.name}“ uložen do Receptů`); return;
   }
   if (!isSaved(r)) return;
-  if (a === "rLog") { const fd = addRecipeToFoods(r); startAmount(fd, { target: "day", mode: "ks", qty: 1 }); }
+  if (a === "rLog") {
+    const tw = tweakInfo(r);
+    if (tw.any) startAmount({ id: null, name: `${r.name} (upraveno)`, basis: "ks", piece: "porce", pieceG: 0, kcal: r1(tw.per.kcal), p: r1(tw.per.p), c: r1(tw.per.c), f: r1(tw.per.f), emoji: recipeEmoji(r) }, { target: "day", mode: "ks", qty: 1 });
+    else { const fd = addRecipeToFoods(r); startAmount(fd, { target: "day", mode: "ks", qty: 1 }); }
+  }
   else if (a === "rToFoods") { addRecipeToFoods(r); renderSheet(); toast(`„${r.name}“ je teď mezi potravinami`); }
   else if (a === "rUnlink") {
     const id = r.foodId; S.lib.foods = S.lib.foods.filter(f => f.id !== id);
@@ -2126,6 +2334,11 @@ function importGo() {
 }
 document.getElementById("sheet").addEventListener("click", e => {
   const b = e.target.closest('[data-act="impGo"]'); if (b) importGo();
+});
+document.getElementById("sheet").addEventListener("click", e => {
+  const b = e.target.closest('[data-act="pickForExtra"]'); if (!b) return;
+  const fr = topSheet(), f = S.lib.foods.find(x => x.id === b.dataset.id); if (!f || !fr) return;
+  startAmount(f, { target: "extra", rid: fr.rid });
 });
 
 /* ---------- recipe editor ---------- */
@@ -2507,7 +2720,7 @@ function renderCook() {
   const body = isPrep
     ? `<h2>Připrav si suroviny</h2>
        <div class="note num" style="text-align:left;font-size:16px">${fmt1(serv)} ${porceWord(serv)} · klepnutím odškrtnete, co máte</div>
-       ${ingListHTML(r)}`
+       ${ingListHTML(r, { cook: true })}`
     : `<h2>${esc(stepTitle(st, si))}</h2>
        ${st.content ? `<p class="ct">${stepContentHTML(r, st.content)}</p>` : ""}
        ${+st.timer_seconds > 0 ? timerBtnHTML(r, st, si) : ""}`;
@@ -2729,7 +2942,7 @@ function renderAgent() {
   const blocked = AG.msgs.some(m => m.permanent);
   const msgs = AG.msgs.map((m, i) => {
     if (m.role === "me") return `<div class="msg me">${esc(m.text)}</div>`;
-    if (m.role === "err") return `<div class="msg bot err">${esc(m.text)}${m.retry ? `<button class="chip" data-ag="retry" style="margin-top:8px">Zkusit znovu</button>` : ""}</div>`;
+    if (m.role === "err") return `<div class="msg bot err">${esc(m.text)}${m.detail ? `<small class="errd">${esc(String(m.detail).slice(0, 400))}</small>` : ""}${m.retry ? `<button class="chip" data-ag="retry" style="margin-top:8px">Zkusit znovu</button>` : ""}</div>`;
     return `${m.text ? `<div class="msg bot">${esc(m.text)}</div>` : ""}${m.est && m.est.items.length ? estHTML(m, i) : ""}`;
   }).join("");
   el.innerHTML = `<div class="ag-head">
@@ -2770,7 +2983,7 @@ async function runAgent() {
     AG.turns.push({ role: "assistant", content: JSON.stringify(est) });
   } catch (e) {
     const code = e && e.code;
-    if (code !== "cancelled") AG.msgs.push({ role: "err", text: AG_ERR[code] || "Něco se pokazilo se spojením. Zkus to znovu.", retry: !PERMANENT.has(code), permanent: PERMANENT.has(code) });
+    if (code !== "cancelled") AG.msgs.push({ role: "err", text: (e && e.hint) || AG_ERR[code] || "Něco se pokazilo se spojením. Zkus to znovu.", detail: e && e.detail, retry: !PERMANENT.has(code), permanent: PERMANENT.has(code) });
     else { const last = AG.msgs[AG.msgs.length - 1]; if (last && last.role === "me") { AG.msgs.pop(); AG.turns.pop(); restore = last.text; } }
   } finally {
     AG.busy = false; AG.ctl = null; renderAgent();
@@ -2870,7 +3083,7 @@ function renderChef() {
   const blocked = CH.msgs.some(m => m.permanent);
   const msgs = CH.msgs.map((m, i) => {
     if (m.role === "me") return `<div class="msg me">${esc(m.text)}</div>`;
-    if (m.role === "err") return `<div class="msg bot err">${esc(m.text)}${m.retry ? `<button class="chip" data-ch="retry" style="margin-top:8px">Zkusit znovu</button>` : ""}</div>`;
+    if (m.role === "err") return `<div class="msg bot err">${esc(m.text)}${m.detail ? `<small class="errd">${esc(String(m.detail).slice(0, 400))}</small>` : ""}${m.retry ? `<button class="chip" data-ch="retry" style="margin-top:8px">Zkusit znovu</button>` : ""}</div>`;
     return `${m.text ? `<div class="msg bot">${esc(m.text)}</div>` : ""}${m.recipe ? chefRecipeHTML(m, i) : ""}`;
   }).join("");
   el.innerHTML = `<div class="ag-head">
@@ -2913,7 +3126,7 @@ async function runChef() {
     CH.turns.push({ role: "assistant", content: JSON.stringify(recipe ? { type: "recipe", text, recipe } : { type: "question", text }) });
   } catch (e) {
     const code = e && e.code;
-    if (code !== "cancelled") CH.msgs.push({ role: "err", text: AG_ERR[code] || "Něco se pokazilo se spojením. Zkus to znovu.", retry: !PERMANENT.has(code), permanent: PERMANENT.has(code) });
+    if (code !== "cancelled") CH.msgs.push({ role: "err", text: (e && e.hint) || AG_ERR[code] || "Něco se pokazilo se spojením. Zkus to znovu.", detail: e && e.detail, retry: !PERMANENT.has(code), permanent: PERMANENT.has(code) });
     else { const last = CH.msgs[CH.msgs.length - 1]; if (last && last.role === "me") { CH.msgs.pop(); CH.turns.pop(); restore = last.text; } }
   } finally {
     CH.busy = false; CH.ctl = null; renderChef();
@@ -3297,7 +3510,11 @@ function makeDb(fdb) {
 /* ---------- AI: Gemini via Firebase AI Logic ---------- */
 function makeSample(app) {
   const ai = getAI(app, { backend: new GoogleAIBackend() });
-  const model = getGenerativeModel(ai, { model: MODEL, generationConfig: { responseMimeType: "application/json", temperature: 0.5 } });
+  /* If Google does not know a model name, try the next one (newer names first, then older). */
+  const chain = [...new Set([MODEL, "gemini-3.5-flash", "gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-2.5-flash"])];
+  const models = {};
+  const modelFor = name => models[name] || (models[name] = getGenerativeModel(ai, { model: name, generationConfig: { responseMimeType: "application/json", temperature: 0.5 } }));
+  let working = 0;
   const toContents = input => {
     const turns = typeof input === "string" ? [{ role: "user", content: input }] : input, out = [];
     for (const t of turns) {
@@ -3307,11 +3524,17 @@ function makeSample(app) {
     }
     return out;
   };
+  const isNotFound = e => /not found|404|is not supported for generatecontent|unknown model/i.test(String(e && (e.message || e)));
   const mapErr = e => {
-    const m = String(e && (e.message || e) || "").toLowerCase();
-    if (/429|quota|exhaust|rate limit/.test(m)) return { code: "rate_limited", message: m };
-    if (/safety|blocked|prohibited/.test(m)) return { code: "refused", message: m };
-    return { code: "upstream_error", message: m };
+    const raw = String(e && (e.message || e) || ""), m = raw.toLowerCase();
+    let hint = "";
+    if (/location is not supported|user location/.test(m)) hint = "Google tu Gemini zdarma nepustí bez platebního účtu. Ve Firebase je potřeba přepnout projekt na tarif Blaze (platí se až nad bezplatný limit).";
+    else if (/has not been used|is disabled|service_disabled|api not enabled/.test(m)) hint = "Ve Firebase ještě není zapnuté AI Logic. Otevři AI Logic a dokonči průvodce s Gemini Developer API.";
+    else if (/api key not valid|are blocked|api_key_service_blocked|referer/.test(m)) hint = "API klíč projektu nepovoluje AI Logic. V Google Cloud → APIs & Services → Credentials u Browser key povol „Firebase AI Logic API“.";
+    else if (/app check|appcheck/.test(m)) hint = "Firebase vyžaduje App Check, který ještě není nastavený. V AI Logic dočasně vypni vynucování App Check.";
+    if (/429|quota|exhaust|rate limit/.test(m)) return { code: "rate_limited", message: raw, detail: raw, hint };
+    if (/safety|blocked due to|prohibited/.test(m) && !hint) return { code: "refused", message: raw, detail: raw };
+    return { code: "upstream_error", message: raw, detail: raw, hint };
   };
   const parseLoose = text => {
     try { return JSON.parse(text); } catch {}
@@ -3328,11 +3551,21 @@ function makeSample(app) {
     const aborted = new Promise((_, rej) => { onAbort = () => rej({ code: "cancelled" }); if (signal) signal.addEventListener("abort", onAbort, { once: true }); });
     aborted.catch(() => {});
     try {
-      const res = await Promise.race([model.generateContent({ contents: toContents(input) }), aborted]);
-      let text = "";
-      try { text = res.response.text(); } catch (e) { throw mapErr(e); }
-      if (!text || !text.trim()) throw { code: "empty_completion" };
-      return text;
+      for (let i = working; i < chain.length; i++) {
+        try {
+          const res = await Promise.race([modelFor(chain[i]).generateContent({ contents: toContents(input) }), aborted]);
+          let text = "";
+          try { text = res.response.text(); } catch (e) { throw mapErr(e); }
+          if (!text || !text.trim()) throw { code: "empty_completion" };
+          working = i;
+          return text;
+        } catch (e) {
+          if (e && e.code === "cancelled") throw e;
+          if (isNotFound(e) && i < chain.length - 1) { console.warn(`Gemini: model ${chain[i]} není dostupný, zkouším ${chain[i + 1]}`); continue; }
+          throw e;
+        }
+      }
+      throw { code: "upstream_error", message: "no model" };
     } catch (e) {
       if (e && e.code && !(e instanceof Error)) throw e;
       console.warn("Gemini:", e);
